@@ -26,11 +26,13 @@ struct ContentView: View {
         return amountPerPerson
     }
     
+    var localCurrency: FloatingPointFormatStyle<Double>.Currency = .currency(code: Locale.current.currency?.identifier ?? "USD")
+    
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    TextField("Amount", value: $checkAmount, format: localCurrency)
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
                 } header: {
@@ -57,7 +59,7 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    Text(totalPerPerson, format: localCurrency)
                 } header: {
                     Text("Amount per person")
                 }
@@ -73,10 +75,6 @@ struct ContentView: View {
                 }
             }
         }
-        
-//        Button("Tap Count: \(tapCount)") {
-//            self.tapCount += 1
-//        }
     }
 }
 
